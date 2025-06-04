@@ -1,6 +1,9 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import { Pool } from 'pg';
+import dotenv from 'dotenv'; // Import dotenv
+
+dotenv.config();
 
 const router = express.Router();
 
@@ -8,15 +11,15 @@ const router = express.Router();
 const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
-    database: 'Wordwave',
-    password: 'Sadmaashiq',
+    database: 'wordwave',
+    password: process.env.DB_PASSWORD,
     port: 5432,
 });
 
 
 pool.connect()
   .then(client => {
-    console.log("Connected to the database");
+    console.log("Connected to the database in register");
     client.release();  // Releases the connection back to the pool
   })
   .catch(err => {

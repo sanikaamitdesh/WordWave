@@ -12,8 +12,8 @@ const router = express.Router();
 const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
-    database: 'Wordwave',
-    password: 'Sadmaashiq',
+    database: 'wordwave',
+    password: process.env.DB_PASSWORD,
     port: 5432,
 });
 
@@ -26,7 +26,7 @@ if(!JWT_SECRET)
 
 pool.connect()
   .then(client => {
-    console.log("Connected to the database");
+    console.log("Connected to the database in login");
     client.release();  // Releases the connection back to the pool
   })
   .catch(err => {
